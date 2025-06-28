@@ -1,0 +1,23 @@
+apiVersion: apps/v1             # API version for Kubernetes Deployment
+kind: Deployment                # Specifies this is a Deployment resource
+metadata:
+  name: nodejs-deployment       # Name of the Deployment
+
+spec:
+  replicas: 2                   # Number of pod replicas to run
+  selector:
+    matchLabels:
+      app: nodejs               # Selects pods with the label app=nodejs
+
+  template:                     # Template for the pods that will be created
+    metadata:
+      labels:
+        app: nodejs             # Labels assigned to pods created by this template
+    spec:
+      containers:
+        - name: nodejs          # Name of the container
+          image: yourdockerhubusername/k8s-nodejs-app:latest  # Docker image to use
+          ports:
+            - containerPort: 3000  # Port exposed by the container
+
+
